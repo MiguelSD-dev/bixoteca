@@ -21,7 +21,7 @@ if (isset($_POST["email"])) {
 
 
     if ($stmt->rowCount() > 0) {
-        $_SESSION["user"] = $email;
+        $_SESSION["user"] = $username;
         header("Location: user.php");
         exit();
     } else {

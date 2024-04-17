@@ -2,13 +2,15 @@
 if (isset($_POST["email"])) {
     include("conexion.php");
 
+    $username = $_POST["username"];
     $email = $_POST["email"];
-    $pass = $_POST["password"];
+    $password = $_POST["password"];
 
-    $sql = "insert into user (username,password,idrol) values (?,?,1)";
+    $sql = "insert into user (username,email,password) values (?,?,?)";
     $stmt = $conexion->prepare($sql);
-    $stmt->bindParam(1, $email);
-    $stmt->bindParam(2, $pass);
+    $stmt->bindParam(1, $username);
+    $stmt->bindParam(2, $email);
+    $stmt->bindParam(2, $password);
 
     try {
         $stmt->execute();
@@ -26,6 +28,7 @@ if (isset($_POST["email"])) {
 ?>
 
 <?php include("./templates/header.php") ?>
+
 
 <section class="h-100 gradient-form" style="background-color: #eee;">
     <div class="container py-5 h-100">
@@ -45,17 +48,22 @@ if (isset($_POST["email"])) {
                                     <p>Create your account</p>
 
                                     <div data-mdb-input-init class="form-outline mb-4">
+                                        <input type="text" name="username" id="username" class="form-control" placeholder="username" required />
+                                        <label class="form-label" for="username">Username</label>
+                                    </div>
+
+                                    <div data-mdb-input-init class="form-outline mb-4">
                                         <input type="email" name="email" id="email" class="form-control" placeholder="Email address" required />
                                         <label class="form-label" for="email">Email</label>
                                     </div>
 
                                     <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="password" name="password" id="password" class="form-control password" />
+                                        <input type="password" name="password" id="password" class="form-control password" placeholder="password"/>
                                         <label class="form-label" for="password">Password</label>
                                     </div>
 
                                     <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="password" name="" id="repassword" class="form-control password" />
+                                        <input type="password" name="" id="repassword" class="form-control password" placeholder="repeat password" />
                                         <label class="form-label" for="repassword">Repeat password</label>
                                     </div>
 
