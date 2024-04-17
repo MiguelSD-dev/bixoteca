@@ -1,13 +1,13 @@
 <?php
 session_start();
 
-if (isset($_SESSION["user"])) {
+if (isset($_SESSION["username"])) {
     header("Location: user.php");
     exit();
 }
 
 
-if (isset($_POST["email"])) {
+if (isset($_POST["username"])) {
 
     include("conexion.php");
 
@@ -22,7 +22,7 @@ if (isset($_POST["email"])) {
 
     if ($stmt->rowCount() > 0) {
         $_SESSION["user"] = $username;
-        header("Location: user.php");
+        header("Location: bixoteca.php");
         exit();
     } else {
         $error = "Username or password incorrect";

@@ -1,16 +1,16 @@
 <?php
-if (isset($_POST["email"])) {
+if (isset($_POST["username"], $_POST["email"], $_POST["password"])) {
     include("conexion.php");
 
     $username = $_POST["username"];
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    $sql = "insert into user (username,email,password) values (?,?,?)";
+    $sql = "INSERT INTO user (username, email, password) VALUES (?, ?, ?)";
     $stmt = $conexion->prepare($sql);
     $stmt->bindParam(1, $username);
     $stmt->bindParam(2, $email);
-    $stmt->bindParam(2, $password);
+    $stmt->bindParam(3, $password);
 
     try {
         $stmt->execute();
@@ -68,9 +68,8 @@ if (isset($_POST["email"])) {
                                     </div>
 
                                     <div class="text-center pt-1 mb-5 pb-1">
-                                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" id="btnRegister" disabled>Register</button>
+                                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" id="btnRegister">Register</button>
                                     </div>
-
 
                                 </form>
 
