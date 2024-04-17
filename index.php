@@ -11,12 +11,12 @@ if (isset($_POST["email"])) {
 
     include("conexion.php");
 
-    $email = $_POST["email"];
-    $pass = $_POST["password"];
+    $username = $_POST["username"];
+    $password = $_POST["password"];
     $sql = "select * from user where username=? and password=?";
     $stmt = $conexion->prepare($sql);
-    $stmt->bindParam(1, $email);
-    $stmt->bindParam(2, $pass);
+    $stmt->bindParam(1, $username);
+    $stmt->bindParam(2, $password);
     $stmt->execute();
 
 
@@ -25,7 +25,7 @@ if (isset($_POST["email"])) {
         header("Location: user.php");
         exit();
     } else {
-        $error = "Email or password incorrect";
+        $error = "Username or password incorrect";
     }
 }
 ?>
@@ -50,18 +50,18 @@ if (isset($_POST["email"])) {
                                     <p>Please login to your account</p>
 
                                     <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="email" name="email" id="form2Example11" class="form-control" placeholder="Email address" />
-                                        <label class="form-label" for="form2Example11">Username</label>
+                                        <label class="form-label" for="username">Username</label>
+                                        <input type="text" name="username" id="username" class="form-control" placeholder="Username" />
                                     </div>
 
                                     <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="password" name="password" id="form2Example22" class="form-control" />
-                                        <label class="form-label" for="form2Example22">Password</label>
+                                        <label class="form-label" for="password">Password</label>
+                                        <input type="password" name="password" id="password" class="form-control" placeholder="Password" />
                                     </div>
 
                                     <div class="text-center pt-1 mb-5 pb-1">
                                         <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Log in</button>
-                                        <a class="text-muted" href="#!">Forgot password?</a>
+                                        <a class="text-muted" href="#!">Forgot password?</a> <!-- ESTA LINEA POR AHORA NO FUNCIONA -->
                                     </div>
 
                                     <div class="d-flex align-items-center justify-content-center pb-4">

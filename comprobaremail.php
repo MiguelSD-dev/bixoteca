@@ -10,8 +10,10 @@ if (isset($_POST["dato"])) {
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {
-        echo json_encode()
+        echo "hola todo bien";
+        exit();
     } else {
-        echo json_encode()
+        echo json_encode(['error' => '']);
+        exit();
     }
 }
