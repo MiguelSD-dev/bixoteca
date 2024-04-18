@@ -1,10 +1,15 @@
 <?php
-session_start();
+session_start(); //Tenemos que iniciar sesion en todas las paginas menos en login y en register
+
+if (!isset($_SESSION["user"])) {
+    header("Location: ./");
+}
+
 if (isset($_POST["bixoname"])) {
     include("conexion.php");
 
     $bixoname = $_POST["bixoname"];
-    $iduser=$_SESSION["iduser"];
+    $iduser = $_SESSION["iduser"];
 
     if (isset($_POST["submit_bixo"])) {
         $sql = "insert into bixo (bixoname,user_iduser) values (?,?)";
@@ -18,9 +23,7 @@ if (isset($_POST["bixoname"])) {
         $stmt->bindParam(2, $iduser);
     }
 
-
     try {
-       
         $stmt->execute();
         if ($stmt->rowCount() > 0) {
             header("Location: ./bixoteca.php");
@@ -29,7 +32,7 @@ if (isset($_POST["bixoname"])) {
             $error = "No se ha podido realizar el registro";
         }
     } catch (PDOException $e) {
-        echo "No se ha podido crear el bixo" .$e;
+        echo "No se ha podido crear el bixo" . $e;
     }
 }
 
