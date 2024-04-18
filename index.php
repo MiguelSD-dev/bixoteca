@@ -21,7 +21,10 @@ if (isset($_POST["username"])) {
 
 
     if ($stmt->rowCount() > 0) {
+        $result = $stmt->fetchAll();
+        $iduser=$result[0]["iduser"];
         $_SESSION["user"] = $username;
+        $_SESSION["iduser"]=$iduser;
         header("Location: bixoteca.php");
         exit();
     } else {

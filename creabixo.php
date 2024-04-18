@@ -1,22 +1,26 @@
 <?php
+session_start();
 if (isset($_POST["bixoname"])) {
     include("conexion.php");
 
     $bixoname = $_POST["bixoname"];
+    $iduser=$_SESSION["iduser"];
 
     if (isset($_POST["submit_bixo"])) {
-        $sql = "insert into bixo (bixoname) values (?)";
+        $sql = "insert into bixo (bixoname,user_iduser) values (?,?)";
         $stmt = $conexion->prepare($sql);
         $stmt->bindParam(1, $bixoname);
+        $stmt->bindParam(2, $iduser);
     } elseif (isset($_POST["submit_planta"])) {
-        $sql = "insert into planta (plantaname) values (?)";
+        $sql = "insert into planta (plantaname,user_iduser) values (?,?)";
         $stmt = $conexion->prepare($sql);
         $stmt->bindParam(1, $bixoname);
+        $stmt->bindParam(2, $iduser);
     }
 
-    // De alguna manera hay que pasarle el id del usuario que esta registrado.
 
     try {
+       
         $stmt->execute();
         if ($stmt->rowCount() > 0) {
             header("Location: ./bixoteca.php");
@@ -25,7 +29,7 @@ if (isset($_POST["bixoname"])) {
             $error = "No se ha podido realizar el registro";
         }
     } catch (PDOException $e) {
-        echo "No se ha podido crear el bixo";
+        echo "No se ha podido crear el bixo" .$e;
     }
 }
 
@@ -37,11 +41,11 @@ if (isset($_POST["bixoname"])) {
     <p>Create your bixo</p>
 
     <div class="text-center pt-1 mb-5 pb-1">
-        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" name="submit_bixo">Bixo</button>
+        <input data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="checkbox" name="submit_bixo">Bixo</input>
     </div>
 
     <div class="text-center pt-1 mb-5 pb-1">
-        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" name="submit_planta">Planta</button>
+        <input data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="checkbox" name="submit_planta">Planta</input>
     </div>
 
     <div data-mdb-input-init class="form-outline mb-4">
