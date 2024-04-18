@@ -45,7 +45,7 @@ function obtener_plantas_del_usuario($usuario_id)
     <?php foreach ($user_bixos as $bixo) : ?>
         <div class="bixo">
             <span><?php echo $bixo['bixoname']; ?></span>
-            <a href="perfil_bixo.php">
+            <a href="perfil_bixo.php?idbixo=<?php echo $bixo['idbixo']; ?>">
                 <img src="assets/img/bixo.png" alt="Bixo" width="50px" height="50px">
             </a>
             <span><?php echo $bixo['puntosevo']; ?></span>
@@ -58,7 +58,7 @@ function obtener_plantas_del_usuario($usuario_id)
     <?php foreach ($user_plantas as $planta) : ?>
         <div class="planta">
             <span><?php echo $planta['plantaname']; ?></span>
-            <a href="perfil_planta.php">
+            <a href="perfil_planta.php?idplanta=<?php echo $planta['idplanta']; ?>">
                 <img src="assets/img/planta.png" alt="Planta" width="50px" height="50px">
             </a>
             <span><?php echo $planta['puntosevo']; ?></span>
