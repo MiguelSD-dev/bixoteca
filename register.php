@@ -15,7 +15,7 @@ if (isset($_POST["username"], $_POST["email"], $_POST["password"])) {
     try {
         $stmt->execute();
         if ($stmt->rowCount() > 0) {
-            header("Location: ./");
+            header("Location: ./creabixo.php");
             exit();
         } else {
             $error = "No se ha podido realizar el registro";
