@@ -24,7 +24,7 @@ if (!isset($_SESSION["user"])) {
         <div class="bixo">
             <span><?php echo $habilidad['habname']; ?></span>
             
-            <img src="assets/img/pescar.png" alt="Pescar" width="50px" height="50px">
+            <img src="assets/img/<?php echo $habilidad['habimg']; ?>.png" alt="Pescar" width="50px" height="50px">
             
             <span><?php echo $habilidad['habdescrip']; ?></span>
 

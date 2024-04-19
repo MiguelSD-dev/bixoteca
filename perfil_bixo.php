@@ -15,40 +15,41 @@ include("conexion.php"); // Incluye el archivo de conexión a la base de datos
 
 $iduser = $_SESSION["iduser"];
 $idbixo = $_GET["idbixo"];
-$sql = "SELECT * FROM bixo WHERE user_iduser = ? AND idbixo = ?";
-//SELECT b.*,h.* 
-//FROM bixo as b
-//left join bixo_habs as bh on b.idbixo=bh.idbixo
-//left join habilidad as h on h.idhab=bh.idhab
-//WHERE b.idbixo = 1 and b.user_iduser=1
+$sql = "SELECT b.*,h.* FROM bixo as b 
+left join bixo_habs as bh on b.idbixo=bh.idbixo
+left join habilidad as h on h.idhab=bh.idhab
+WHERE b.idbixo = ? and b.user_iduser= ?";
 
 $stmt = $conexion->prepare($sql);
-$stmt->bindParam(1, $iduser);
-$stmt->bindParam(2, $idbixo);
+$stmt->bindParam(1, $idbixo);
+$stmt->bindParam(2, $iduser);
 $stmt->execute();
-$bixo=$stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+$habilidades = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
+<span><?php echo $habilidades[0]["bixoname"]; ?></span>
 
+<span><?php echo $habilidades[0]["ataque"] + $habilidades[0]["habataque"]; ?></span>
 
+<span><?php echo $habilidades[0]["defensa"]; ?></span>
 
-<span><?php echo $bixo["bixoname"]; ?></span>
+<span><?php echo $habilidades[0]["instinto"]; ?></span>
 
+<span><?php echo $habilidades[0]["poblacion"]; ?></span>
 
+<span><?php echo $habilidades[0]["puntosevo"]; ?></span>
 
-<span><?php echo $bixo["ataque"] + $bixo["habataque"]; ?></span>
-
-<span><?php echo $bixo["defensa"]; ?></span>
-
-<span><?php echo $bixo["instinto"]; ?></span>
-
-<span><?php echo $bixo["poblacion"]; ?></span>
-
-<span><?php echo $bixo["puntosevo"]; ?></span>
-
-
-<!-- Aqui tabla combinada de habilidades con un for each y dibujitos -->
-
+<div>
+    <?php foreach ($habilidades as $habilidad) : ?>
+        <div class="bixo_habilidad">
+            <span><?php echo $habilidad['habname']; ?></span>
+            
+            <img src="assets/img/<?php echo $habilidad['habimg']; ?>.png" alt="<?php echo $habilidad['habname']; ?>" width="50px" height="50px">
+            
+            <span><?php echo $habilidad['habdescrip']; ?></span>
+        </div>
+    <?php endforeach; ?>
+</div>
 
 
 
