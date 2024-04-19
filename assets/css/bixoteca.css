@@ -1,0 +1,137 @@
+* {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #b6f6f1;
+}
+
+header {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    background: linear-gradient(to right, rgb(13, 236, 62), rgb(245, 212, 22), rgb(241, 102, 47));
+}
+
+.star-button {
+    position: relative;
+    background-color: transparent;
+    border: none;
+    font-size: 150px; /* Tamaño de la fuente del botón */
+    color: violet; /* Color de la estrella */
+    cursor: pointer;
+    outline: none; /* Elimina el contorno al hacer clic */
+    padding: 0; /* Elimina cualquier relleno del botón */
+    margin-top: 10px;
+}
+.star-button:hover {
+    color: gold; /* Cambia el color al pasar el cursor sobre la estrella */
+}
+
+.info-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px; /* Tamaño del texto INFO */
+    font-weight: bold;
+    color: black; /* Color del texto INFO */
+}
+
+
+.card-title{
+    font-size: 38px;
+    font-weight: bolder;
+    margin-top: 10px;
+    margin-right: 30px;
+    color: darkviolet;
+}
+.ms-md-auto{
+    font-size: 38px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-right: 30px;
+}
+.carousel-inner .carousel-item img {
+    max-height: 200px; /* Define una altura máxima para las imágenes */
+    max-width: 200px; /* Define un ancho máximo para las imágenes */
+}
+
+#animal,
+#planta {
+    /*width: 80%; *//* Define el ancho del carrusel */
+    margin: 0 auto; /* Centra el carrusel horizontalmente */
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    top: auto; /* Elimina la posición superior */
+    bottom: 0; /* Mueve los controles a la parte inferior */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    transform: scale(1.5); /* Redimensiona los íconos de control */
+}
+
+
+footer {
+    background-color: rgb(228, 187, 8) !important;
+    text-align: center;
+    font-weight: bold;
+    font-style: oblique;
+    color: black;
+    width: 100%;
+    padding: 20px 0;
+    margin: 0 auto; /* Centra el pie de página horizontalmente */
+}
+#animal {
+    background-color: red; /* Fondo rojo para el carrusel */
+}
+#planta{
+    background-color: green;
+}
+
+.carousel-item img {
+    border: 5px solid rgb(11, 11, 116); /* Borde azul para las imágenes del carrusel */
+    display: block;
+    margin: 0 auto;
+}
+#crear{
+    background-color: lightskyblue;
+    color:blueviolet;
+}
+.sliders{
+    display: flex;
+    justify-content: space-between;
+
+}
+.sliders >div{
+    width: 20%;
+    margin-left: 20px;
+}
+
+form {
+    margin: 0 auto; /* Agrega margen automático izquierdo y derecho para centrar horizontalmente */
+    text-align: center;
+    display: inline-block;
+    max-width: 600px;
+    width: 100%;
+    padding: 20px;
+    border: 2px solid #6feee3;
+    border-radius: 5px;
+    background-color: lightsteelblue;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto; /* Centra el contenido del pie de página */
+}
+
+.formulario_login{
+    display: flex;
+    justify-content: space-around;
+    }

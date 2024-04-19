@@ -27,64 +27,71 @@ if (isset($_POST["username"], $_POST["email"], $_POST["password"])) {
     $stmt->execute([$username, $email, $password, $user_id]);
 
     // Redirigir a alguna página después de la edición
-    header("Location: ./some_page.php");
+    header("Location: ./bixoteca.php");
     exit();
 }
 ?>
 
-<?php include("./templates/header.php") ?>
+<!DOCTYPE html>
+<html lang="en">
 
-<section class="h-100 gradient-form" style="background-color: #eee;">
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-xl-10">
-                <div class="card rounded-3 text-black">
-                    <div class="row g-0">
-                        <div class="col-lg-6">
-                            <div class="card-body p-md-5 mx-md-4">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>header</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/bixoteca.css" />
+</head>
 
-                                <div class="text-center">
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp" style="width: 185px;" alt="logo">
-                                    <h4 class="mt-1 mb-5 pb-1">Edit Your Profile</h4>
-                                </div>
-
-                                <form action="" method="post">                                   
-                                    <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="text" name="username" id="username" class="form-control" placeholder="Username" value="<?php echo $user_data['username']; ?>" required />
-                                        <label class="form-label" for="username">Username</label>
-                                    </div>
-
-                                    <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="email" name="email" id="email" class="form-control" placeholder="Email address" value="<?php echo $user_data['email']; ?>" required />
-                                        <label class="form-label" for="email">Email</label>
-                                    </div>
-
-                                    <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="password" name="password" id="password" class="form-control password" placeholder="Password" value="<?php echo $user_data['password']; ?>" />
-                                        <label class="form-label" for="password">Password</label>
-                                    </div>
-
-                                    <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="password" name="repassword" id="repassword" class="form-control password" placeholder="Repeat Password"/>
-                                        <label class="form-label" for="repassword">Repeat Password</label>
-                                    </div>
-
-                                    <div class="text-center pt-1 mb-5 pb-1">
-                                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" id="btnRegister" disabled>Save Changes</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
-                            <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                                <!-- Aquí puedes mostrar información adicional si lo deseas -->
-                            </div>
-                        </div>
+<body>
+    <header>
+        <div class="container-fluid p-5">
+            <div class="row">
+                <div class="col-md-6 logo d-flex align-items-center">
+                    <a href="bixoteca.php">
+                        <img src="assets/img/logo.png" class="img-fluid rounded-start" alt="logo">
+                    </a>
+                </div>
+                <div class="col-md-6 titulo d-flex align-items-center">
+                    <div class="ms-md-auto">
+                        <h5 class="card-title">EVOLUCIONA!!</h5>
+                        <p class="card-text">El juego más adictivo que hayas conocido</p>
                     </div>
+                    <button class="star-button">&#9733;<span class="info-text"><a href="userdata.php">INFO</a></span></button>
+
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </header>
 
-<?php include("./templates/footer.php") ?>
+    <div class="container mt-5 formulario_login">
+
+        <form action="" method="post">
+            <div data-mdb-input-init class="form-outline mb-4">
+                <input type="text" name="username" id="username" class="form-control" placeholder="Username" value="<?php echo $user_data['username']; ?>" required />
+                <label class="form-label" for="username">Username</label>
+            </div>
+
+            <div data-mdb-input-init class="form-outline mb-4">
+                <input type="email" name="email" id="email" class="form-control" placeholder="Email address" value="<?php echo $user_data['email']; ?>" required />
+                <label class="form-label" for="email">Email</label>
+            </div>
+
+            <div data-mdb-input-init class="form-outline mb-4">
+                <input type="password" name="password" id="password" class="form-control password" placeholder="Password" value="<?php echo $user_data['password']; ?>" />
+                <label class="form-label" for="password">Password</label>
+            </div>
+
+            <div data-mdb-input-init class="form-outline mb-4">
+                <input type="password" name="repassword" id="repassword" class="form-control password" placeholder="Repeat Password" />
+                <label class="form-label" for="repassword">Repeat Password</label>
+            </div>
+
+            <div class="text-center pt-1 mb-5 pb-1">
+                <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" id="btnRegister" disabled>Save Changes</button>
+            </div>
+        </form>
+    </div>
+    </section>
+
+    <?php include("./templates/footer.php") ?>

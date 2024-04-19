@@ -15,39 +15,96 @@ include("conexion.php"); // Incluye el archivo de conexión a la base de datos
 
 $iduser = $_SESSION["iduser"];
 $idplanta = $_GET["idplanta"];
-$sql = "SELECT * FROM planta WHERE user_iduser = ? AND idplanta = ?";
-$stmt = $conexion->prepare($sql);
-$stmt->bindParam(1, $iduser);
-$stmt->bindParam(2, $idplanta);
-$stmt->execute();
-$planta = $stmt->fetch(PDO::FETCH_ASSOC);
-?>
+$sql = "SELECT p.*,h.* FROM planta as p
+left join planta_habs as ph on p.idplanta=ph.idplanta
+left join habilidad as h on h.idhab=ph.idhab
+WHERE p.idplanta = ? and p.user_iduser= ?";
 
-<span><?php echo $planta["plantaname"]; ?></span>
-<span><?php echo $planta["ataque"]; ?></span>
-<span><?php echo $planta["defensa"]; ?></span>
-<span><?php echo $planta["instinto"]; ?></span>
-<span><?php echo $planta["poblacion"]; ?></span>
-<span><?php echo $planta["puntosevo"]; ?></span>
-
-<!-- Aquí se mostrarán las habilidades asociadas a la planta -->
-<h2>Habilidades de la Planta</h2>
-<?php
-$sql = "SELECT habilidad.habname, habilidad.habimg, habilidad.habdescrip, habilidad.habpuntos 
-        FROM habilidad 
-        INNER JOIN planta_habs ON habilidad.idhab = planta_habs.idhab 
-        WHERE planta_habs.idplanta = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bindParam(1, $idplanta);
+$stmt->bindParam(2, $iduser);
 $stmt->execute();
+
 $habilidades = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-foreach ($habilidades as $habilidad) {
-    echo "<div class='habilidad'>";
-    echo "<img src='" . $habilidad['habimg'] . "' alt='" . $habilidad['habname'] . "' width='50px' height='50px'>";
-    echo "<span>" . $habilidad['habname'] . "</span>";
-    echo "<span>" . $habilidad['habdescrip'] . "</span>";
-    echo "<span>" . $habilidad['habpuntos'] . "</span>";
-    echo "</div>";
+$sumaataque = 0;
+$sumadefensa = 0;
+$sumainstinto = 0;
+
+foreach ($habilidades as $key => $habilidad) {
+    $sumaataque += $habilidad["habataque"];
+    $sumadefensa += $habilidad["habdefensa"];
+    $sumainstinto += $habilidad["habinstinto"];
 }
 ?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>header</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/bixoteca.css" />
+</head>
+
+<body>
+    <header>
+        <div class="container-fluid p-5">
+            <div class="row">
+                <div class="col-md-6 logo d-flex align-items-center">
+                    <a href="bixoteca.php">
+                        <img src="assets/img/logo.png" class="img-fluid rounded-start" alt="logo">
+                    </a>
+                </div>
+                <div class="col-md-6 titulo d-flex align-items-center">
+                    <div class="ms-md-auto">
+                        <h5 class="card-title">EVOLUCIONA!!</h5>
+                        <p class="card-text">El juego más adictivo que hayas conocido</p>
+                    </div>
+                    <button class="star-button">&#9733;<span class="info-text"><a href="userdata.php">INFO</a></span></button>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container text-center mt-5">
+
+
+        <span><?php echo $habilidades[0]["plantaname"]; ?></span>
+
+        <span><?php echo $habilidades[0]["ataque"] + $sumaataque ?></span>
+
+        <span><?php echo $habilidades[0]["defensa"] + $sumadefensa; ?></span>
+
+        <span><?php echo $habilidades[0]["instinto"] + $sumainstinto; ?></span>
+
+        <span><?php echo $habilidades[0]["poblacion"]; ?></span>
+
+        <span><?php echo $habilidades[0]["puntosevo"]; ?></span>
+
+        <div>
+            <?php foreach ($habilidades as $habilidad) : ?>
+                <div class="planta_habilidad">
+                    <span><?php echo $habilidad['habname']; ?></span>
+
+                    <img src="assets/img/<?php echo $habilidad['habimg']; ?>.png" alt="<?php echo $habilidad['habname']; ?>" width="50px" height="50px">
+
+                    <span><?php echo $habilidad['habdescrip']; ?></span>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <form action="habilidades.php" method="get">
+            <div>
+                <input type="hidden" name="idplanta" value="<?php echo $idplanta; ?>">
+                <button type="submit">Comprar habilidades</button>
+            </div>
+        </form>
+
+    </div>
+
+    <?php include("./templates/footer.php") ?>
