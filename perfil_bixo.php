@@ -6,7 +6,7 @@ if (!isset($_SESSION["user"])) {
     header("Location: ./");
     exit();
 }
-if(!isset($_GET["idbixo"])){
+if (!isset($_GET["idbixo"])) {
     header("Location: ./");
     exit();
 }
@@ -41,9 +41,9 @@ foreach ($habilidades as $key => $habilidad) {
 
 <span><?php echo $habilidades[0]["ataque"] + $sumaataque ?></span>
 
-<span><?php echo $habilidades[0]["defensa"] + $sumadefensa ; ?></span>
+<span><?php echo $habilidades[0]["defensa"] + $sumadefensa; ?></span>
 
-<span><?php echo $habilidades[0]["instinto"] + $sumainstinto ; ?></span>
+<span><?php echo $habilidades[0]["instinto"] + $sumainstinto; ?></span>
 
 <span><?php echo $habilidades[0]["poblacion"]; ?></span>
 
@@ -53,14 +53,17 @@ foreach ($habilidades as $key => $habilidad) {
     <?php foreach ($habilidades as $habilidad) : ?>
         <div class="bixo_habilidad">
             <span><?php echo $habilidad['habname']; ?></span>
-            
+
             <img src="assets/img/<?php echo $habilidad['habimg']; ?>.png" alt="<?php echo $habilidad['habname']; ?>" width="50px" height="50px">
-            
+
             <span><?php echo $habilidad['habdescrip']; ?></span>
         </div>
     <?php endforeach; ?>
 </div>
 
-
-
-
+<form action="habilidades.php" method="get">
+    <div>
+        <input type="hidden" name="idbixo" value="<?php echo $idbixo; ?>">
+        <button type="submit">Comprar habilidades</button>
+    </div>
+</form>
