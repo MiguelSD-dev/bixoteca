@@ -25,15 +25,25 @@ $stmt->bindParam(1, $idbixo);
 $stmt->bindParam(2, $iduser);
 $stmt->execute();
 $habilidades = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$sumaataque = 0;
+$sumadefensa = 0;
+$sumainstinto = 0;
+
+foreach ($habilidades as $key => $habilidad) {
+    $sumaataque += $habilidad["habataque"];
+    $sumadefensa += $habilidad["habdefensa"];
+    $sumainstinto += $habilidad["habinstinto"];
+}
 ?>
 
 <span><?php echo $habilidades[0]["bixoname"]; ?></span>
 
-<span><?php echo $habilidades[0]["ataque"] + $habilidades[0]["habataque"]; ?></span>
+<span><?php echo $habilidades[0]["ataque"] + $sumaataque ?></span>
 
-<span><?php echo $habilidades[0]["defensa"]; ?></span>
+<span><?php echo $habilidades[0]["defensa"] + $sumadefensa ; ?></span>
 
-<span><?php echo $habilidades[0]["instinto"]; ?></span>
+<span><?php echo $habilidades[0]["instinto"] + $sumainstinto ; ?></span>
 
 <span><?php echo $habilidades[0]["poblacion"]; ?></span>
 
